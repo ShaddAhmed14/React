@@ -1,21 +1,16 @@
-import { useState } from "react"; // useState is a type of hook 
+import { useState, useEffect } from "react"; // useState is a type of hook 
 import BlogList from "./BlogList";
+import useFetch from "./useFetch";
 
 const Home = () => {
-    const [blogs, setBlogs] = useState([
-        {title: "A new day", body: "lorem ipsum", author: "mario", id:1},
-        {title: "Another day", body: "lorem ipsum", author: "shadd", id:2},
-        {title: "Sadness", body: "lorem ipsum", author: "ahmed", id:3},
-    ])
-
-    const handleDelete = (id) => {
-        const newBlog = blogs.filter(blog => blog.id !== id)
-        setBlogs(newBlog) 
-    }
-
+    const { data: blogs, isPending, error } = useFetch("http://localhost:8000/blogs") // this is ur custom hook
+    // reading object and renaming data as blogs 
+    
     return ( 
         <div className="home">
-            <BlogList blogs={blogs} title={"All Blogs!"} handleDelete={handleDelete}/>
+            { error && <div> {error} </div>}
+            { isPending && <div> Loading... </div> }
+            { blogs && <BlogList blogs={blogs} title={"All Blogs!"}/>}
         </div>
      );
 }
@@ -31,4 +26,14 @@ export default Home;
 - BlogList is a component so we can re-use it since similar work in coming features.
 - Instead of passing blogs you can do smth like blogs.filter((blog) => blog.author === "mario") ... this will filter out and return only
     the blogs of mario
+- useEffect is called everytime component is rendered or re-rendered
+- useEffect is a hook as well. Hooks are like pre-defined functions that help us write react. 
+- Make sure not to setState in useEffect bcz itll trigger an infinite loop, bcz remember... use Effect runs everytime you re-render ie update
+    state
+- useEffect(()=> {}, []) will make useEffect only run once... when it renders and never again. You can pass dependencies to this array to make
+    it run on specific states or smth
+- useEffect(()=> {}, [name]) will make useEffect only runs at render and when name state changes. So itll not work run when blogs are changed
+    only at start and when name is updated... name is the dependency. 
+- doing blogs && ... basically means... if blogs is null then dont go right else call component. This is error handling for us. If
+    blogs is null and data is not yet fetched then dont crash, just print nothing. This is called conditional rendering  
 */

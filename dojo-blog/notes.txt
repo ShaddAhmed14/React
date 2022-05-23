@@ -1,3 +1,6 @@
 npx create-react-app dojo-blog // to create the react app
 npm run start // to run the app 
 npm i // installs all dependencies using packages.json... itll create node_modules folder
+
+-- l 16
+npx json-server --watch data/db.json --port 8000 // watch is ur json file directory // we use this to fetch data

@@ -1,0 +1,7 @@
+{
+    "blogs" : [
+        {"title": "A new day", "body": "lorem ipsum", "author": "mario", "id":1},
+        {"title": "Another day", "body": "lorem ipsum", "author": "shadd", "id":2},
+        {"title": "Sadness", "body": "lorem ipsum", "author": "ahmed", "id":3}
+    ]
+}

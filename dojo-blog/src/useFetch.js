@@ -7,7 +7,8 @@ const useFetch = (url) => {
     const [error, setError] = useState(null)
     
     useEffect(() => {
-        fetch(url) // fetch data from DB
+        const abortCont = new AbortController()
+        fetch(url, {signal : abortCont.signal}) // fetch data from DB
         .then((res)=> {
             if(!res.ok){ // res.ok checks if we found a response or if there was an error
                 throw Error("Could not find the resource") // we throw error here and catch block catches it
@@ -21,10 +22,21 @@ const useFetch = (url) => {
             setError(null)
         })
         .catch((err) => {
-            setError(err.message) 
-            setIsPending(null)})
+            if(err.name === "AbortError"){ // if abort error do nothing
+                console.log("Fetch aborted")
+            }
+            else{ // else show error on same page 
+                setError(err.message) 
+                setIsPending(null)
+            }})
+        
+        return () => abortCont.abort()
     }, [url])
     return { data, isPending, error}
 }
 
 export default useFetch
+
+/* NOTES
+- Abort controller is for... when fetch is still underway and we change the page. In that case we abort its fetch
+*/

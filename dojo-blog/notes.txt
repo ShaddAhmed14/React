@@ -4,3 +4,6 @@ npm i // installs all dependencies using packages.json... itll create node_modul
 
 -- l 16
 npx json-server --watch data/db.json --port 8000 // watch is ur json file directory // we use this to fetch data
+
+-- l 21
+npm i react-router-dom@5 // version 6 is in beta at the time of the playlist... and doesnt support router... use exam method

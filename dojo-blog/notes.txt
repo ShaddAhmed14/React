@@ -7,3 +7,14 @@ npx json-server --watch data/db.json --port 8000 // watch is ur json file direct
 
 -- l 21
 npm i react-router-dom@5 // version 6 is in beta at the time of the playlist... and doesnt support router... use exam method
+
+-- New stuff learned: (Go through notes in corresponding file for more detail)
+- History : create.js
+- e.preventDefault : create.js 
+- exact param : App.js 
+- :id : App.js 
+- props : BlogList.js 
+- useEffect : homepage.js 
+- array.filter : homepage.js 
+- blogs && <div... : homepage.js 
+- Abort : useFetch.js 
